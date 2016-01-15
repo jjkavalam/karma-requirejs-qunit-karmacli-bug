@@ -1,0 +1,17 @@
+{
+  "name": "karma-requirejs-qunit-karmacli-bug",
+  "version": "1.0.0",
+  "description": "To demonstrate a bug introduced by karma cli when using both qunit and requirejs frameworks with karma",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_nodules/.bin/karma start"
+  },
+  "author": "jjkavalam",
+  "license": "ISC",
+  "dependencies": {
+    "requirejs": "^2.1.22"
+  },
+  "devDependencies": {
+    "qunitjs": "^1.20.0"
+  }
+}
