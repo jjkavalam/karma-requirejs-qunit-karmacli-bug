@@ -1,4 +1,4 @@
-define(['QUnit', 'calculator'],function(QUnit, calculator){
+define(['calculator'],function(calculator){
     QUnit.test('calculator add two numbers correctly',function(assert){
         assert.equal(5, calculator.add(2,3));
     });

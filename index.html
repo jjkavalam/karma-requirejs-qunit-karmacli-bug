@@ -8,18 +8,42 @@
 <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
+    <!-- 
+        FIXME !!!
+        What is the reason for the error ?
+        ==================================
+        Swap the two script tags below to fix the error 
+
+        Details: I believe the problem occurs because, in the case when qunit is imported after requirejs,
+        qunit exports itself using a call to define()
+        
+        As a result, define() gets called before the "requirejs.config(...)" and "requirejs([...])" calls,
+        leading to an error.
+        
+        On the other hand if qunit.js is imported before require.js,
+        qunit will simply export itself as global.
+
+        How is this relavant to Karma ?
+        ===============================
+        A similar situation arises when karma.conf.js defines frameworks in the order:
+        // ...
+            frameworks: ['qunit', 'requirejs']
+        // ...
+        where as the correct order should be ['requirejs', 'qunit'].
+
+        But the default order produced by the "karma init" command is the wrong one.
+
+        A potential fix ...
+        ===================
+
+    -->
     <script src="node_modules/requirejs/require.js"></script>
+    <script src="node_modules/qunitjs/qunit/qunit.js"></script>
     <script>
         requirejs.config({
-            baseUrl: 'src/',
-            paths: {
-                'QUnit': '../node_modules/qunitjs/qunit/qunit'
-            }
+            baseUrl: 'src/'
         });
-        requirejs(["../test/test.calculator.js"],function(){
-            QUnit.load();
-            QUnit.start();
-        });
+        requirejs(["../test/test.calculator.js"]);
     </script>
 </body>
 </html>
